@@ -10,8 +10,9 @@ def load_bill_data():
     with open('bills.csv', newline='') as file:
         reader = csv.DictReader(file)
         for row in reader:
-            data[row['admission_no']] = row
+            data[row['admission_no'].lower()] = row  # 🔁 Convert to lowercase
     return data
+
 
 def record_payment(details):
     with open('payments.csv', 'a', newline='') as file:
@@ -31,7 +32,7 @@ def index():
 
 @app.route('/bill', methods=['POST'])
 def bill():
-    admission_no = request.form['admission_no']
+    admission_no = request.form['admission_no'].lower()
     data = load_bill_data()
     if admission_no in data:
         student = data[admission_no]
