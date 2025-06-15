@@ -15,10 +15,10 @@
         <p><strong>New Room:</strong> {{ student.new_room }}</p>
         <p><strong>Bill Amount:</strong> ₹{{ student.bill_amount }}</p>
 
-        <form method="POST" action="/pay">
-          <input type="hidden" name="admission_no" value="{{ student.admission_no }}">
-          <button type="submit" class="btn btn-success w-100">Pay with UPI</button>
-        </form>
+        <a class="btn btn-success w-100"
+           href="upi://pay?pa=fathimahanna@oksbi&pn=Hostel+Mess&am={{ student.bill_amount }}&cu=INR">
+          Pay with UPI
+        </a>
       </div>
     </div>
   </div>
