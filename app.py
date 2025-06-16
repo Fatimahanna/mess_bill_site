@@ -82,6 +82,7 @@ def paid():
     try:
         with open('payments.csv', newline='') as file:
             reader = csv.reader(file)
+            next(reader, None)
             for row in reader:
                 paid.append(row)
                 total += float(row[5])
