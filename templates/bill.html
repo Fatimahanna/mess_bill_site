@@ -15,10 +15,22 @@
         <p><strong>New Room:</strong> {{ student.new_room }}</p>
         <p><strong>Bill Amount:</strong> ₹{{ student.bill_amount }}</p>
 
-        <a class="btn btn-success w-100"
-           href="upi://pay?pa=fathimahanna@oksbi&pn=Hostel+Mess&am={{ student.bill_amount }}&cu=INR">
-          Pay with UPI
-        </a>
+        <form method="POST" action="/confirm">
+          <!-- Send student details to /confirm -->
+          <input type="hidden" name="name" value="{{ student.name }}">
+          <input type="hidden" name="admission_no" value="{{ student.admission_no }}">
+          <input type="hidden" name="old_room" value="{{ student.old_room }}">
+          <input type="hidden" name="new_room" value="{{ student.new_room }}">
+          <input type="hidden" name="bill_amount" value="{{ student.bill_amount }}">
+
+          <!-- Redirect to UPI and then record payment -->
+          <a href="{{ upi_link }}" class="btn btn-success w-100 mb-2" target="_blank">Pay with UPI</a>
+          <small class="text-muted d-block mb-2">
+            Please add your admission number in the UPI note while paying.
+          </small>
+
+          <button type="submit" class="btn btn-primary w-100">I've Paid</button>
+        </form>
       </div>
     </div>
   </div>
