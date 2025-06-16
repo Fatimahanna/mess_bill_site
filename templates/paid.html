@@ -1,32 +1,91 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Paid Students</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <meta charset="UTF-8">
+  <title>Paid Students</title>
+  <style>
+    body {
+      background-color: #f4fcf4;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    .container {
+      width: 90%;
+      margin: 40px auto;
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    }
+
+    h1 {
+      text-align: center;
+      color: #2e7d32;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    th, td {
+      padding: 10px;
+      border: 1px solid #ccc;
+      text-align: center;
+    }
+
+    th {
+      background-color: #d0f0d0;
+    }
+
+    .download {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+    }
+
+    a {
+      padding: 10px 15px;
+      background-color: #388e3c;
+      color: white;
+      border-radius: 5px;
+      text-decoration: none;
+    }
+
+    a:hover {
+      background-color: #2e7d32;
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Paid Students</h1>
-        <p><strong>Total Collected:</strong> ₹{{ total_amount }}</p>
-        <a href="/download/paid">Download as Excel</a>
-        <table>
-            <tr>
-                <th>SL No</th>
-                <th>Old Room</th>
-                <th>New Room</th>
-                <th>Name</th>
-                <th>Admission No</th>
-                <th>Amount</th>
-                <th>Timestamp</th>
-            </tr>
-            {% for row in paid %}
-            <tr>
-                {% for item in row %}
-                <td>{{ item }}</td>
-                {% endfor %}
-            </tr>
-            {% endfor %}
-        </table>
+  <div class="container">
+    <h1>Paid Students List</h1>
+    <p>Total Collected: ₹{{ total_amount }}</p>
+
+    <table>
+      <tr>
+        <th>SL No</th>
+        <th>Old Room</th>
+        <th>New Room</th>
+        <th>Name</th>
+        <th>Admission No</th>
+        <th>Amount</th>
+        <th>Time</th>
+      </tr>
+      {% for row in paid %}
+        <tr>
+          {% for item in row %}
+            <td>{{ item }}</td>
+          {% endfor %}
+        </tr>
+      {% endfor %}
+    </table>
+
+    <div class="download">
+      <a href="/download/paid">Download Excel</a>
+      <a href="/unpaid">View Unpaid</a>
     </div>
+  </div>
 </body>
 </html>

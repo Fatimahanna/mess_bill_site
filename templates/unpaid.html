@@ -1,31 +1,88 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Unpaid Students</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <meta charset="UTF-8">
+  <title>Unpaid Students</title>
+  <style>
+    body {
+      background-color: #fff8f0;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    .container {
+      width: 90%;
+      margin: 40px auto;
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    }
+
+    h1 {
+      text-align: center;
+      color: #c0392b;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    th, td {
+      padding: 10px;
+      border: 1px solid #ccc;
+      text-align: center;
+    }
+
+    th {
+      background-color: #ffe0d0;
+    }
+
+    .download {
+      text-align: right;
+      margin-top: 20px;
+    }
+
+    a {
+      padding: 10px 15px;
+      background-color: #e74c3c;
+      color: white;
+      border-radius: 5px;
+      text-decoration: none;
+    }
+
+    a:hover {
+      background-color: #c0392b;
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Unpaid Students</h1>
-        <a href="/download/unpaid">Download as Excel</a>
-        <table>
-            <tr>
-                <th>Name</th>
-                <th>Admission No</th>
-                <th>Old Room</th>
-                <th>New Room</th>
-                <th>Bill Amount</th>
-            </tr>
-            {% for student in unpaid %}
-            <tr>
-                <td>{{ student.name }}</td>
-                <td>{{ student.admission_no }}</td>
-                <td>{{ student.old_room }}</td>
-                <td>{{ student.new_room }}</td>
-                <td>₹{{ student.bill_amount }}</td>
-            </tr>
-            {% endfor %}
-        </table>
+  <div class="container">
+    <h1>Unpaid Students</h1>
+
+    <table>
+      <tr>
+        <th>Name</th>
+        <th>Admission No</th>
+        <th>Old Room</th>
+        <th>New Room</th>
+        <th>Bill Amount</th>
+      </tr>
+      {% for student in unpaid %}
+        <tr>
+          <td>{{ student.name }}</td>
+          <td>{{ student.admission_no }}</td>
+          <td>{{ student.old_room }}</td>
+          <td>{{ student.new_room }}</td>
+          <td>{{ student.bill_amount }}</td>
+        </tr>
+      {% endfor %}
+    </table>
+
+    <div class="download">
+      <a href="/download/unpaid">Download Excel</a>
     </div>
+  </div>
 </body>
 </html>
