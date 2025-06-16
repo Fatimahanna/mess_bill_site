@@ -157,5 +157,5 @@ def download_unpaid():
     output.seek(0)
     return send_file(output, download_name="unpaid_students.xlsx", as_attachment=True)
 
-if __name__ == '__main__':
-    app.run(debug=True)
+#if __name__ == '__main__':
+    #app.run(debug=True)
