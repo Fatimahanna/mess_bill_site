@@ -1,38 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <title>Mess Bill</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Bill Details</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
-<body class="bg-light py-5">
-  <div class="container">
-    <div class="card shadow mx-auto" style="max-width: 500px;">
-      <div class="card-body text-center">
-        <h3 class="card-title mb-3">🔎 Student Details</h3>
+<body>
+    <div class="container">
+        <h1>Bill Details</h1>
         <p><strong>Name:</strong> {{ student.name }}</p>
+        <p><strong>Admission Number:</strong> {{ student.admission_no }}</p>
         <p><strong>Old Room:</strong> {{ student.old_room }}</p>
         <p><strong>New Room:</strong> {{ student.new_room }}</p>
         <p><strong>Bill Amount:</strong> ₹{{ student.bill_amount }}</p>
+        <p><a href="{{ upi_link }}">Click here to pay via UPI</a></p>
 
         <form method="POST" action="/confirm">
-          <!-- Send student details to /confirm -->
-          <input type="hidden" name="name" value="{{ student.name }}">
-          <input type="hidden" name="admission_no" value="{{ student.admission_no }}">
-          <input type="hidden" name="old_room" value="{{ student.old_room }}">
-          <input type="hidden" name="new_room" value="{{ student.new_room }}">
-          <input type="hidden" name="bill_amount" value="{{ student.bill_amount }}">
-
-          <!-- Redirect to UPI and then record payment -->
-          <a href="{{ upi_link }}" class="btn btn-success w-100 mb-2" target="_blank">Pay with UPI</a>
-          <small class="text-muted d-block mb-2">
-            Please add your admission number in the UPI note while paying.
-          </small>
-
-          <button type="submit" class="btn btn-primary w-100">I've Paid</button>
+            {% for key, value in student.items() %}
+            <input type="hidden" name="{{ key }}" value="{{ value }}">
+            {% endfor %}
+            <button type="submit">I have paid</button>
         </form>
-      </div>
     </div>
-  </div>
 </body>
 </html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Unpaid Students</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Unpaid Students</h1>
+        <a href="/download/unpaid">Download as Excel</a>
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Admission No</th>
+                <th>Old Room</th>
+                <th>New Room</th>
+                <th>Bill Amount</th>
+            </tr>
+            {% for student in unpaid %}
+            <tr>
+                <td>{{ student.name }}</td>
+                <td>{{ student.admission_no }}</td>
+                <td>{{ student.old_room }}</td>
+                <td>{{ student.new_room }}</td>
+                <td>₹{{ student.bill_amount }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</body>
+</html>

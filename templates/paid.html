@@ -1,48 +1,32 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <title>Paid Students</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Paid Students</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
-<body class="p-4 bg-light">
-  <div class="container">
-    <h2 class="mb-4">✅ Paid Students</h2>
-
-    <div class="mb-3">
-      <a href="/unpaid" class="btn btn-warning">📄 View Unpaid</a>
-      <a href="/download/paid" class="btn btn-success">⬇ Download Paid List</a>
-      <a href="/download/unpaid" class="btn btn-danger">⬇ Download Unpaid List</a>
+<body>
+    <div class="container">
+        <h1>Paid Students</h1>
+        <p><strong>Total Collected:</strong> ₹{{ total_amount }}</p>
+        <a href="/download/paid">Download as Excel</a>
+        <table>
+            <tr>
+                <th>SL No</th>
+                <th>Old Room</th>
+                <th>New Room</th>
+                <th>Name</th>
+                <th>Admission No</th>
+                <th>Amount</th>
+                <th>Timestamp</th>
+            </tr>
+            {% for row in paid %}
+            <tr>
+                {% for item in row %}
+                <td>{{ item }}</td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </table>
     </div>
-
-    <h5 class="text-primary mb-3">Total Collected: ₹{{ total_amount }}</h5>
-
-    <table class="table table-bordered table-striped">
-      <thead class="table-success">
-        <tr>
-          <th>SL NO</th>
-          <th>Old Room</th>
-          <th>New Room</th>
-          <th>Name</th>
-          <th>Admission No</th>
-          <th>Amount</th>
-          <th>Timestamp</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for student in paid %}
-        <tr>
-          <td>{{ student[0] }}</td>
-          <td>{{ student[1] }}</td>
-          <td>{{ student[2] }}</td>
-          <td>{{ student[3] }}</td>
-          <td>{{ student[4] }}</td>
-          <td>{{ student[5] }}</td>
-          <td>{{ student[6] }}</td>
-        </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-  </div>
 </body>
 </html>
